@@ -1,45 +1,29 @@
-#include <stdio.h>
+#include "stdio.h"
 
-int main(){
 
-    int arr[10], num, x, y, temp;
-
-    printf(" Enter the Number of Elements  ");
-
-    scanf("%d", &num);
-
-    printf("Enter the Value of Elements: ");
-
-    for(x = 0; x < num; x++)
-
-        scanf("%d", &arr[x]);
-
-    for(x = 0; x < num - 1; x++){
-
-        for(y = 0; y < num - x - 1; y++){
-
-            if(arr[y] > arr[y + 1]){
-
-                temp = arr[y];
-
-                arr[y] = arr[y + 1];
-
-                arr[y + 1] = temp;
-
-            }
-
-        }
-
+int binarySearch(int arr[],int n,int x)
+{
+    int low =0,high=n-1;
+    while (high >= low) {
+        int mid =(high+low)/2;
+        if (arr[mid] == x)
+            return mid;
+       else if (arr[mid] > x) high=mid-1;
+        else if (arr[mid] < x) low=mid+1;
     }
+    return -1;
+}
 
-    printf("Array after  bubble sort: ");
-
-    for(x = 0; x < num; x++){
-
-        printf("%d  ", arr[x]);
-
-    }
-
+int main(void)
+{
+    int arr[] = { 2, 3, 4, 10, 40,90 };
+    int n = sizeof(arr) / sizeof(arr[0]);
+    printf("enter the num ");
+    int x ;
+    scanf("%d",&x);
+    int index = binarySearch(arr, n , x);
+    if(index == -1)
+    printf("Element is not in array");
+    else printf("Element is at index %d", index);
     return 0;
-
 }
