@@ -1,29 +1,27 @@
-#include "stdio.h"
-
-
-int binarySearch(int arr[],int n,int x)
-{
-    int low =0,high=n-1;
-    while (high >= low) {
-        int mid =(high+low)/2;
-        if (arr[mid] == x)
-            return mid;
-       else if (arr[mid] > x) high=mid-1;
-        else if (arr[mid] < x) low=mid+1;
-    }
-    return -1;
+#include <stdio.h>
+int BinarySearch(int arr[], int low, int high, int element){
+   if (high >= low){
+      int middle =  (high + low)/2;
+      if (arr[middle] == element)
+         return middle;
+      if (arr[middle] > element)
+         return BinarySearch(arr, low, middle-1, element);
+      return BinarySearch(arr, middle+1, high, element);
+   }
+   return -1;
 }
-
-int main(void)
-{
-    int arr[] = { 2, 3, 4, 10, 40,90 };
-    int n = sizeof(arr) / sizeof(arr[0]);
+int main(void){
+   int arr[] = {1, 4, 7, 9, 16, 56, 70};
+   int n = sizeof(arr) / sizeof(arr[0]);
     printf("enter the num ");
     int x ;
     scanf("%d",&x);
-    int index = binarySearch(arr, n , x);
-    if(index == -1)
-    printf("Element is not in array");
-    else printf("Element is at index %d", index);
-    return 0;
+   int found_index = BinarySearch(arr, 0, n-1, x);
+   if(found_index == -1 ) {
+      printf("Element not found in the array ");
+   }
+   else {
+      printf("Element found at index : %d",found_index);
+   }
+   return 0;
 }
